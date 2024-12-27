@@ -9,12 +9,14 @@ char *get_next_line(int fd)
 	ssize_t bytes_read;
 	int i = 0;
 	int j = 0;
+	stock = malloc(1);
 
-	while(bytes_read = read(fd, buffer, BUFFER_SIZE) > 0)
+	while((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
+		printf("bytes_read : %d\n" , bytes_read);
 		buffer[bytes_read] = '\0';
 
-		tmp = ft_strjoin(tmp, stock);
+		tmp = ft_strjoin(tmp, buffer);
 
 		if (ft_strchr(tmp , '\n'))
 			break;
@@ -24,13 +26,17 @@ char *get_next_line(int fd)
 		stock[i] = tmp[i];
 		i++;
 	}
-	stock[i] = '\0';
-	printf("stock : %s\n", stock);
+	if (tmp[i] == '\n')
+		stock[i] = '\n';
+	else
+		stock[i] = '\0';
+	printf("stock : %s", stock);
 	return stock;
 }
 int main(){
 	int fd = open("file.txt",O_RDONLY);
 	printf("fd: %d\n", fd);
+	get_next_line(fd);
 	get_next_line(fd);
 	// get_next_line(fd);
 	// get_next_line(fd);
