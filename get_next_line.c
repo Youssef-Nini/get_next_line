@@ -1,6 +1,9 @@
 
 #include "get_next_line.h"
-
+char *get_rid_line(char *str)
+{
+	
+}
 char *get_next_line(int fd)
 {
 	static char *stock = NULL;
@@ -13,8 +16,9 @@ char *get_next_line(int fd)
 
 	while((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		printf("bytes_read : %d\n" , bytes_read);
+		// printf("bytes_read : %d\n" , bytes_read);
 		buffer[bytes_read] = '\0';
+		// printf("buffer : %s\n ", buffer);
 
 		tmp = ft_strjoin(tmp, buffer);
 
@@ -30,6 +34,7 @@ char *get_next_line(int fd)
 		stock[i] = '\n';
 	else
 		stock[i] = '\0';
+	tmp = NULL;
 	printf("stock : %s", stock);
 	return stock;
 }
@@ -38,9 +43,9 @@ int main(){
 	printf("fd: %d\n", fd);
 	get_next_line(fd);
 	get_next_line(fd);
-	// get_next_line(fd);
-	// get_next_line(fd);
-	// get_next_line(fd);
+	get_next_line(fd);
+	get_next_line(fd);
+	get_next_line(fd);
 	// get_next_line(fd);
 	// printf("read:%s", get_next_line(fd));
 	
